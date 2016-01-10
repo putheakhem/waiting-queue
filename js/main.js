@@ -1,4 +1,8 @@
 /**
+  By Mr KHEM Puthea
+*/
+
+/**
  * Variable to store timeout objects
  * @type {Array}
  */
@@ -14,6 +18,17 @@ var clearSystem = function () {
     });
     timeOuts = [];
 };
+
+/*
+ client array
+*/
+var _clients = [
+    ],
+    waitingQue = [],
+    servicing = null,
+    duration = 150,
+    timeUnit = 100;
+
 
 
 /**
@@ -117,6 +132,16 @@ var system = function ($scope) {
     }
 
     /**
+     * When duration inter-arrive of client is time
+     * Shift out one from clients and put its id and duration of service to waiting que
+     */
+    var arriveEvent = function () {
+        var client = clients.shift();
+        waitingQue.push({id: client.id, dService: client.dService});
+        checkService(true);
+    };
+
+    /**
      * Check server weather it free
      * Or decrement time of client is being serviced
      */
@@ -139,16 +164,6 @@ var system = function ($scope) {
         }
     };
 
-
-    /**
-     * When duration inter-arrive of client is time
-     * Shift out one from clients and put its id and duration of service to waiting que
-     */
-    var arriveEvent = function () {
-        var client = clients.shift();
-        waitingQue.push({id: client.id, dService: client.dService});
-        checkService(true);
-    };
     /**
      * When an event occur, new push report have to do
      */

@@ -1,6 +1,7 @@
 /**
- * Created by engraksa on 12/15/2014.
- */
+  By Mr KHEM Puthea
+*/
+
 var app = angular.module('waitingQue', []);
 app.factory('waitSystem', function () {
     return {
@@ -48,7 +49,7 @@ app.controller('waitingQueController', ['$scope', 'waitSystem', function ($scope
 
     //Timers
     $scope.times = [0, 100, 500, 1000];
-    $scope.time = null;
+    $scope.time = null ;
     $scope.timeChamger = true;
 
     //Select change
@@ -62,7 +63,7 @@ app.controller('waitingQueController', ['$scope', 'waitSystem', function ($scope
         }
     };
 
-    $scope.showContent_time = 0;
+    $scope.showContent_time = true;
     $scope.changeDuration = function () {
         if($scope.showContent_time > 0){
             duration = $scope.showContent_time;
