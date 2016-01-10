@@ -1,10 +1,66 @@
 <!DOCTYPE html>
-<html>
-	<head>
-	</head>
+<html ng-app="waitingQue">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Waiting System</title>
+    <link rel="stylesheet" href="css/table.css"/>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/angularjs/angular.js"></script>
+</head>
 <body>
-	
+<div ng-controller="myCtrl">
+    <div ng-show="!showContent_file">
+        <label for="fileUpload">Select file data:</label>
+        <input id="fileUpload" name="fileUpload" type="file" id="input" multiple
+                onchange="angular.element(this).scope().handleFiles(this.files)">
+    </div>
+    <br>
+    <div ng-show="!showContent_time">
+        <label for="timer">Select simulation time:</label>
+        <select id="timer" name="timer" ng-model="showContent_time" ng-options="val for val in [150,5000]" ng-change="changeDuration()">
+            <option value="">-- choose timer --</option>
+        </select>
+    </div>
+    <div ng-show="showContent_file && showContent_time">
+        <div ng-show="timeChamger"><label for="time">Simulation Time : </label>
+            <select name="time" id="time" ng-model="time" ng-options="val for val in times" ng-change="changeTime()">
+                <option value="">-- choose delay time --</option>
+            </select></div>
+
+        <table border="1" cellspacing="0">
+            <thead>
+            <tr>
+                <td>No. événement</td>
+                <td>Horloge système</td>
+                <td>No. client</td>
+                <td>Type événement: a-arrivée, d-départ</td>
+                <td>Longueur de la fille attente</td>
+                <td>
+                    État du serveur: 0–libre ,1-occupé
+                </td>
+                <td>
+                    Calendrier des événements
+                    <br>
+                    (Temps, No. client, type événement)
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="event in events track by $index">
+                <td ng-bind="event.id"></td>
+                <td ng-bind="event.time"></td>
+                <td ng-bind="event.clientId"></td>
+                <td ng-bind="event.eventType"></td>
+                <td ng-bind="event.waitingQue"></td>
+                <td ng-bind="event.stateOfServer"></td>
+                <td class="last" ng-bind="event.eventState"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="js/variables.js"></script>
+<script src="js/system.js"></script>
+<script src="js/appController.js"></script>
 </body>
-
-
 </html>
