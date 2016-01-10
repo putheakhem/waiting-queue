@@ -7,7 +7,7 @@ app.factory('waitSystem', function () {
         run: system
     }
 });
-app.controller('myCtrl', ['$scope', 'waitSystem', function ($scope, $waitSystem) {
+app.controller('waitingQue', ['$scope', 'waitSystem', function ($scope, $waitSystem) {
     $scope.showContent_file = false;
     $scope.showContent_time = false;
     //Read data
@@ -30,22 +30,7 @@ app.controller('myCtrl', ['$scope', 'waitSystem', function ($scope, $waitSystem)
         });
         callBack(forReturn);
     };
-    $scope.handleFiles = function (files) {
-        for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-            var reader = new FileReader();
-            reader.onload = (function (data) {
-                parser(data.target.result, function (back) {
-                    _clients = back;
-                    $scope.$apply(function () {
-                        $scope.showContent_file = back.length > 0;
-                    });
-                });
-            });
-            reader.readAsText(file);
-            reader.readAsText(file);
-        }
-    };
+
     //Read data
 
     $scope.title = 'Waiting que';
@@ -83,4 +68,20 @@ app.controller('myCtrl', ['$scope', 'waitSystem', function ($scope, $waitSystem)
             duration = $scope.showContent_time;
         }
     }
+    $scope.handleFiles = function (files) {
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+            reader.onload = (function (data) {
+                parser(data.target.result, function (back) {
+                    _clients = back;
+                    $scope.$apply(function () {
+                        $scope.showContent_file = back.length > 0;
+                    });
+                });
+            });
+            reader.readAsText(file);
+            reader.readAsText(file);
+        }
+    };
 }]);

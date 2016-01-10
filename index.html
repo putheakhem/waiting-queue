@@ -2,13 +2,13 @@
 <html ng-app="waitingQue">
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Waiting System</title>
+    <title>Waiting Que</title>
     <link rel="stylesheet" href="css/table.css"/>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/angularjs/angular.js"></script>
 </head>
 <body>
-<div ng-controller="myCtrl">
+<div ng-controller="waitingQueController">
     <div ng-show="!showContent_file">
         <label for="fileUpload">Select file data:</label>
         <input id="fileUpload" name="fileUpload" type="file" id="input" multiple
