@@ -7,7 +7,7 @@ app.factory('waitSystem', function () {
         run: system
     }
 });
-app.controller('waitingQue', ['$scope', 'waitSystem', function ($scope, $waitSystem) {
+app.controller('waitingQueController', ['$scope', 'waitSystem', function ($scope, $waitSystem) {
     $scope.showContent_file = false;
     $scope.showContent_time = false;
     //Read data
